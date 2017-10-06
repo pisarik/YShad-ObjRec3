@@ -14,4 +14,12 @@ All work organized by folders and subfolders, separated in different levels. Dep
 
 ## Data
 
+111 classes of different textures. Each class represented with 5 grayscale images with size 200x200.
+
+* comp1_test - shift??
+* comp2_test - scale changed > 1
+* comp3_test - scale changed < 1
+* comp4_test - rotate
+
+
 ## Results
