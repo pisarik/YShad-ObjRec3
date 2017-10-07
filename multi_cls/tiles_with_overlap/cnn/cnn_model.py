@@ -23,7 +23,7 @@ def generateReadme(model):
     print('  tiles on the edges of main tiles. Then each tile resized to 16x16.', file=readme)
     print('* Dataset of all tiles standardized (centered + scaled).', file=readme)
     print('### Augmentation', file=readme)
-    print('40 degrees, 0.2 zoom, reflect', file=readme)
+    print('90 degrees, [0.5, 2] zoom, reflect', file=readme)
     print('### Architecture', file=readme)
     print('![Architecture](architecture.png)', file=readme)
     print('### Model summary', file=readme)
@@ -63,7 +63,7 @@ if __name__ == '__main__':
                                x_train.shape[1], x_train.shape[2], 1))
     print(x_train.shape, y_train.shape)
 
-    datagen = ImageDataGenerator(rotation_range=40, zoom_range=0.2,  # [0.5, 2]
+    datagen = ImageDataGenerator(rotation_range=90, zoom_range=[0.5, 2],
                                  fill_mode='reflect')
 
     # i = 0
