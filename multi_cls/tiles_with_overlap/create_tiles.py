@@ -1,5 +1,6 @@
 import numpy as np
 from skimage import io
+import cv2
 
 import os
 
@@ -13,10 +14,13 @@ def piramidTiling(img, tile_rows=None, tile_cols=None):
     img = img[:tile_rows * N, :tile_cols * M]
     tiles = []
 
-    while img.shape[0] != tile_rows and img.shape[1] != tile_cols:
+    # while img.shape[0] != tile_rows and img.shape[1] != tile_cols:
+    for k in range(2):
         for i in range(0, img.shape[0], tile_rows):
             for j in range(0, img.shape[1], tile_cols):
-                tiles.append(img[i:i + tile_rows, j:j + tile_cols])
+                tile = img[i:i + tile_rows, j:j + tile_cols]
+                tile = cv2.resize(tile, (16, 16), interpolation=cv2.INTER_AREA)
+                tiles.append(tile)
 
         img = img[tile_rows // 2: -tile_rows // 2,
                   tile_cols // 2: -tile_cols // 2]
@@ -34,8 +38,8 @@ if __name__ == '__main__':
             name = os.path.basename(path)
             save_path = os.path.join('_tiles', '{}_{}.png'.format(name, idx))
             io.imsave(save_path, tile)
-            result_csv.append([save_path, cls])
+            result_csv.append([os.path.join('..', save_path), cls])
 
     result_csv = np.array(result_csv)
-    np.savetxt('tiles.csv', result_csv, header='path,cls', fmt='%s',
+    np.savetxt('train.csv', result_csv, header='path,cls', fmt='%s',
                delimiter=',')
