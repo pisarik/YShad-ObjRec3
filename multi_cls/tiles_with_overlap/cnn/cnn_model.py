@@ -94,7 +94,7 @@ if __name__ == '__main__':
     # model.add(Dropout(0.25))
 
     model.add(Flatten())
-    # model.add(Dense(256, activation='relu'))
+    model.add(Dense(256, activation='relu'))
     model.add(Dropout(0.25))
     model.add(Dense(111, activation='softmax'))
 
@@ -102,7 +102,7 @@ if __name__ == '__main__':
     model.compile(loss='categorical_crossentropy', optimizer=sgd)
     print(model.summary())
 
-    history = model.fit(x_train, y_train, batch_size=256, epochs=150)
+    history = model.fit(x_train, y_train, batch_size=256, epochs=110)
 
     plt.figure(figsize=(12, 6))
     plt.plot(history.history['loss'])
