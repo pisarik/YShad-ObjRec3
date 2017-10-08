@@ -89,8 +89,8 @@ if __name__ == '__main__':
     # model.add(Dropout(0.25))
 
     # model.add(Conv2D(32, (3, 3), activation='relu'))
-    # # model.add(Conv2D(64, (3, 3), activation='relu'))
-    # model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Conv2D(64, (3, 3), activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
     # model.add(Dropout(0.25))
 
     model.add(Flatten())
