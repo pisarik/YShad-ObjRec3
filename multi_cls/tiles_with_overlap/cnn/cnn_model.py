@@ -95,14 +95,14 @@ if __name__ == '__main__':
 
     model.add(Flatten())
     # model.add(Dense(256, activation='relu'))
-    # model.add(Dropout(0.5))
+    model.add(Dropout(0.25))
     model.add(Dense(111, activation='softmax'))
 
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy', optimizer=sgd)
     print(model.summary())
 
-    history = model.fit(x_train, y_train, batch_size=32, epochs=25)
+    history = model.fit(x_train, y_train, batch_size=256, epochs=100)
 
     plt.figure(figsize=(12, 6))
     plt.plot(history.history['loss'])
@@ -118,4 +118,5 @@ if __name__ == '__main__':
                            'C:/Program Files (x86)/Graphviz2.38/bin/')
     keras.utils.plot_model(model, to_file='architecture.png', show_shapes=True)
 
+    plt.show()
     generateReadme(model)
