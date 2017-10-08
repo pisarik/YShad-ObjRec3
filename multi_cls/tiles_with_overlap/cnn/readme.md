@@ -8,16 +8,17 @@
 ### Architecture
 ![Architecture](architecture.png)
 ### Model summary
-Layer (type)                | Output Shape           |   Param #   
-----------------------------|------------------------|-------------
-conv2d_1 (Conv2D)           | (None, 30, 30, 16)     |   160       
-max_pooling2d_1 (MaxPooling2| (None, 15, 15, 16)     |   0         
-conv2d_2 (Conv2D)           | (None, 13, 13, 32)     |   4640      
-max_pooling2d_2 (MaxPooling2| (None, 6, 6, 32)       |   0         
-conv2d_3 (Conv2D)           | (None, 4, 4, 64)       |   18496     
-max_pooling2d_3 (MaxPooling2| (None, 2, 2, 64)       |   0         
-flatten_1 (Flatten)         | (None, 256)            |   0         
-dense_1 (Dense)             | (None, 111)            |   28527     
+
+Layer (type)                | Output Shape          |    Param #   
+----------------------------|-----------------------|--------------
+conv2d_1 (Conv2D)           | (None, 30, 30, 16)    |    160       
+max_pooling2d_1 (MaxPooling2| (None, 15, 15, 16)    |    0         
+conv2d_2 (Conv2D)           | (None, 13, 13, 32)    |    4640      
+max_pooling2d_2 (MaxPooling2| (None, 6, 6, 32)      |    0         
+conv2d_3 (Conv2D)           | (None, 4, 4, 64)      |    18496     
+max_pooling2d_3 (MaxPooling2| (None, 2, 2, 64)      |    0         
+flatten_1 (Flatten)         | (None, 256)           |    0         
+dense_1 (Dense)             | (None, 111)           |    28527     
 
 Total params: 51,823  
 Trainable params: 51,823  

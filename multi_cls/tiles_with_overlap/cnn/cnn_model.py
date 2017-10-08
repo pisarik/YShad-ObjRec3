@@ -102,7 +102,7 @@ if __name__ == '__main__':
     model.compile(loss='categorical_crossentropy', optimizer=sgd)
     print(model.summary())
 
-    history = model.fit(x_train, y_train, batch_size=512, epochs=500)
+    history = model.fit(x_train, y_train, batch_size=32, epochs=25)
 
     plt.figure(figsize=(12, 6))
     plt.plot(history.history['loss'])
