@@ -77,13 +77,13 @@ if __name__ == '__main__':
     model = Sequential()
     # input: 64x64 images with 1 channel -> (64, 64) tensors.
     # this applies 32 convolution filters of size 3x3 each.
-    model.add(Conv2D(16, (3, 3), activation='relu',
+    model.add(Conv2D(32, (3, 3), activation='relu',
                      input_shape=x_train.shape[1:]))
     # model.add(Conv2D(32, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     # model.add(Dropout(0.25))
 
-    model.add(Conv2D(32, (3, 3), activation='relu'))
+    model.add(Conv2D(64, (3, 3), activation='relu'))
     # model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     # model.add(Dropout(0.25))
@@ -102,7 +102,7 @@ if __name__ == '__main__':
     model.compile(loss='categorical_crossentropy', optimizer=sgd)
     print(model.summary())
 
-    history = model.fit(x_train, y_train, batch_size=256, epochs=100)
+    history = model.fit(x_train, y_train, batch_size=256, epochs=150)
 
     plt.figure(figsize=(12, 6))
     plt.plot(history.history['loss'])
