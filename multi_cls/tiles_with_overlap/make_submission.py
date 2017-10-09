@@ -17,7 +17,7 @@ if __name__ == '__main__':
     with open(path.join(model_name, 'scaler.pkl'), 'rb') as handle:
         scaler = pickle.load(handle)
     model = keras.models.load_model(path.join(model_name,
-                                              'model.h5'))
+                                              'model_200epochs.h5'))
 
     path_to_data = '../../_data'
     path_to_csv = path.join(path_to_data, 'brodatz_dataset_test_submit.csv')

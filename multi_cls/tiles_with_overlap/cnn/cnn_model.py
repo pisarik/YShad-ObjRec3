@@ -111,7 +111,7 @@ if __name__ == '__main__':
     model.compile(loss='categorical_crossentropy', optimizer=sgd)
     print(model.summary())
 
-    # model = keras.models.load_model('model.h5')
+    model = keras.models.load_model('model.h5')
     history = model.fit_generator(datagen.flow(x_train, y_train,
                                                batch_size=256),
                                   steps_per_epoch=len(x_train) / 256,
@@ -126,7 +126,7 @@ if __name__ == '__main__':
     plt.legend(['train', 'valid'], loc='upper left')
 
     plt.savefig('loss.png')
-    model.save('model.h5')
+    model.save('model_200epochs.h5')
     os.environ["PATH"] += (os.pathsep +
                            'C:/Program Files (x86)/Graphviz2.38/bin/')
     keras.utils.plot_model(model, to_file='architecture.png', show_shapes=True)
