@@ -10,21 +10,18 @@
 ### Model summary
 Layer (type)                | Output Shape           |   Param #   
 ----------------------------|------------------------|-------------
-conv2d_1 (Conv2D)           | (None, 62, 62, 32)     |   320       
-conv2d_2 (Conv2D)           | (None, 60, 60, 32)     |   9248      
-max_pooling2d_1 (MaxPooling2| (None, 30, 30, 32)     |   0         
-dropout_1 (Dropout)         | (None, 30, 30, 32)     |   0         
-conv2d_3 (Conv2D)           | (None, 28, 28, 64)     |   18496     
-conv2d_4 (Conv2D)           | (None, 26, 26, 64)     |   36928     
-max_pooling2d_2 (MaxPooling2| (None, 13, 13, 64)     |   0         
-dropout_2 (Dropout)         | (None, 13, 13, 64)     |   0         
-flatten_1 (Flatten)         | (None, 10816)          |   0         
-dense_1 (Dense)             | (None, 256)            |   2769152   
-dropout_3 (Dropout)         | (None, 256)            |   0         
-dense_2 (Dense)             | (None, 111)            |   28527     
+conv2d_1 (Conv2D)           | (None, 30, 30, 32)     |   320       
+max_pooling2d_1 (MaxPooling2| (None, 15, 15, 32)     |   0         
+conv2d_2 (Conv2D)           | (None, 13, 13, 64)     |   18496     
+max_pooling2d_2 (MaxPooling2| (None, 6, 6, 64)       |   0         
+conv2d_3 (Conv2D)           | (None, 4, 4, 64)       |   36928     
+max_pooling2d_3 (MaxPooling2| (None, 2, 2, 64)       |   0         
+flatten_1 (Flatten)         | (None, 256)            |   0         
+dropout_1 (Dropout)         | (None, 256)            |   0         
+dense_1 (Dense)             | (None, 111)            |   28527     
 ----------------------------|------------------------|-------------
-Total params: 2,862,671  
-Trainable params: 2,862,671  
+Total params: 84,271  
+Trainable params: 84,271  
 Non-trainable params: 0  
 ### Results
 ![Loss plot](loss.png)

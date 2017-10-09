@@ -36,7 +36,7 @@ if __name__ == '__main__':
     result_csv = []
     for path, cls in samples:
         img = io.imread(path, as_grey=True)
-        for idx, tile in enumerate(piramidTiling(img, 64, 64)):
+        for idx, tile in enumerate(piramidTiling(img, 32, 32)):
             name = os.path.basename(path)
             save_path = os.path.join('_tiles', '{}_{}.png'.format(name, idx))
             io.imsave(save_path, tile)
