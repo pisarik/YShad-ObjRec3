@@ -1,6 +1,7 @@
 import numpy as np
 import pickle
 from collections import Counter
+from scipy.stats.mstats import gmean
 
 import skimage.io
 
@@ -39,10 +40,10 @@ if __name__ == '__main__':
         tiles = tiles.reshape((tiles.shape[0],
                                tiles.shape[1], tiles.shape[2], 1))
 
-        preds = model.predict_classes(tiles, batch_size=len(tiles))
-        pred = Counter(preds).most_common(1)
+        preds = model.predict(tiles, batch_size=len(tiles))
+        pred = np.argmax(gmean(preds)) + 1
 
-        submission.append([img_path, str(pred[0][0] + 1)])
+        submission.append([img_path, str(pred)])
 
     path_to_save = path.join(model_name, 'submission.txt')
     np.savetxt(path_to_save, submission, fmt='%s', delimiter=',')
