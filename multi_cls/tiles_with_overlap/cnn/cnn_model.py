@@ -13,6 +13,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras.optimizers import SGD
+from keras import regularizers
 
 
 def formatSummaryLine(line):
@@ -76,7 +77,7 @@ if __name__ == '__main__':
                                x_train.shape[1], x_train.shape[2], 1))
     print(x_train.shape, y_train.shape)
 
-    datagen = ImageDataGenerator(rotation_range=10, zoom_range=0.2,
+    datagen = ImageDataGenerator(rotation_range=40, zoom_range=0.5,
                                  # width_shift_range=.1, height_shift_range=.1,
                                  fill_mode='reflect')
 
@@ -92,19 +93,22 @@ if __name__ == '__main__':
 
     model.add(Conv2D(32, (3, 3), activation='relu',
                      input_shape=x_train.shape[1:]))
+    model.add(Conv2D(32, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    # model.add(Dropout(0.25))
+    model.add(Dropout(0.25))
 
     model.add(Conv2D(64, (3, 3), activation='relu'))
+    model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.25))
+
+    # model.add(Conv2D(128, (3, 3), activation='relu'))
+    # model.add(MaxPooling2D(pool_size=(2, 2)))
     # model.add(Dropout(0.25))
 
-    model.add(Conv2D(128, (3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-
     model.add(Flatten())
-    # model.add(Dense(256, activation='relu'))
-    model.add(Dropout(0.25))
+    model.add(Dense(256, activation='relu'))
+    model.add(Dropout(0.5))
     model.add(Dense(111, activation='softmax'))
 
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
@@ -126,7 +130,7 @@ if __name__ == '__main__':
     plt.legend(['train', 'valid'], loc='upper left')
 
     plt.savefig('loss.png')
-    model.save('model_200epochs.h5')
+    model.save('model.h5')
     os.environ["PATH"] += (os.pathsep +
                            'C:/Program Files (x86)/Graphviz2.38/bin/')
     keras.utils.plot_model(model, to_file='architecture.png', show_shapes=True)
