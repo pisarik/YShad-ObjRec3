@@ -27,7 +27,7 @@ if __name__ == '__main__':
     for img_path, cls in test_samples:
         full_path = path.join(path_to_data, img_path)
         img = skimage.io.imread(full_path, as_grey=True)
-        tiles = piramidTiling(img, 32, 32)
+        tiles = piramidTiling(img, 96, 96)
 
         for idx, tile in enumerate(tiles):
             shape = tile.shape
@@ -39,8 +39,7 @@ if __name__ == '__main__':
         tiles = tiles.reshape((tiles.shape[0],
                                tiles.shape[1], tiles.shape[2], 1))
 
-        with tf.device('/cpu:0'):
-            preds = model.predict_classes(tiles, batch_size=len(tiles))
+        preds = model.predict_classes(tiles, batch_size=len(tiles))
         pred = Counter(preds).most_common(1)
 
         submission.append([img_path, str(pred[0][0] + 1)])

@@ -19,7 +19,7 @@ def piramidTiling(img, tile_rows=None, tile_cols=None):
         for i in range(0, img.shape[0], tile_rows):
             for j in range(0, img.shape[1], tile_cols):
                 tile = img[i:i + tile_rows, j:j + tile_cols]
-                # tile = cv2.resize(tile, (32, 32), interpolation=cv2.INTER_AREA)
+                tile = cv2.resize(tile, (32, 32), interpolation=cv2.INTER_AREA)
                 tiles.append(tile)
 
         img = img[tile_rows // 2: -tile_rows // 2,
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     result_csv = []
     for path, cls in samples:
         img = io.imread(path, as_grey=True)
-        for idx, tile in enumerate(piramidTiling(img, 32, 32)):
+        for idx, tile in enumerate(piramidTiling(img, 96, 96)):
             name = os.path.basename(path)
             save_path = os.path.join('_tiles', '{}_{}.png'.format(name, idx))
             io.imsave(save_path, tile)
