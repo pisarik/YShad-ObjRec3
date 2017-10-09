@@ -1,4 +1,4 @@
-# CNN model - VGG like 0.6 loss.
+# CNN model
 ### Preprocessing
 * One sample splitted into 9 main tiles 64x64. Plus 4 overlapping
   tiles on the edges of main tiles. Then each tile resized to 32x32.
