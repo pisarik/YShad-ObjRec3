@@ -33,7 +33,7 @@ def generateReadme(model):
     print('# CNN model', file=readme)
     print('### Preprocessing', file=readme)
     print('* One sample splitted into 9 main tiles 64x64. Plus 4 overlapping', file=readme)
-    print('  tiles on the edges of main tiles. Then each tile resized to 16x16.', file=readme)
+    print('  tiles on the edges of main tiles. Then each tile resized to 32x32.', file=readme)
     print('* Dataset of all tiles standardized (centered + scaled).', file=readme)
     print('### Augmentation', file=readme)
     print('90 degrees, [0.5, 2] zoom, reflect', file=readme)
@@ -76,7 +76,8 @@ if __name__ == '__main__':
                                x_train.shape[1], x_train.shape[2], 1))
     print(x_train.shape, y_train.shape)
 
-    datagen = ImageDataGenerator(rotation_range=90, zoom_range=[0.5, 2],
+    datagen = ImageDataGenerator(rotation_range=10, zoom_range=0.2,
+                                 # width_shift_range=.1, height_shift_range=.1,
                                  fill_mode='reflect')
 
     # i = 0
@@ -91,19 +92,15 @@ if __name__ == '__main__':
 
     model.add(Conv2D(32, (3, 3), activation='relu',
                      input_shape=x_train.shape[1:]))
-    # model.add(Conv2D(32, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     # model.add(Dropout(0.25))
 
     model.add(Conv2D(64, (3, 3), activation='relu'))
-    # model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     # model.add(Dropout(0.25))
 
-    # model.add(Conv2D(32, (3, 3), activation='relu'))
-    model.add(Conv2D(64, (3, 3), activation='relu'))
+    model.add(Conv2D(128, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    # model.add(Dropout(0.25))
 
     model.add(Flatten())
     # model.add(Dense(256, activation='relu'))
@@ -114,7 +111,11 @@ if __name__ == '__main__':
     model.compile(loss='categorical_crossentropy', optimizer=sgd)
     print(model.summary())
 
-    history = model.fit(x_train, y_train, batch_size=256, epochs=100)
+    # model = keras.models.load_model('model.h5')
+    history = model.fit_generator(datagen.flow(x_train, y_train,
+                                               batch_size=256),
+                                  steps_per_epoch=len(x_train) / 256,
+                                  epochs=100)
 
     plt.figure(figsize=(12, 6))
     plt.plot(history.history['loss'])

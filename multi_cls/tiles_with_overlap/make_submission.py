@@ -27,7 +27,7 @@ if __name__ == '__main__':
     for img_path, cls in test_samples:
         full_path = path.join(path_to_data, img_path)
         img = skimage.io.imread(full_path, as_grey=True)
-        tiles = piramidTiling(img, 96, 96)
+        tiles = piramidTiling(img, 64, 64)
 
         for idx, tile in enumerate(tiles):
             shape = tile.shape
