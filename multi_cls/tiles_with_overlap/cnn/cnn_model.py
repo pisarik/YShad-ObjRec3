@@ -15,6 +15,19 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.optimizers import SGD
 
 
+def formatSummaryLine(line):
+    if '___' in line:
+        return ''
+    elif len(line) < 30:
+        return line + '  \n'
+    else:
+        sep_poses = [28, 52]
+        for i, pos in enumerate(sep_poses):
+            line = line[:pos + i] + '|' + line[pos + i:]
+
+        return line.replace('=', '-') + '\n'
+
+
 def generateReadme(model):
     readme = open('readme.md', 'w')
     print('# CNN model', file=readme)
@@ -27,7 +40,7 @@ def generateReadme(model):
     print('### Architecture', file=readme)
     print('![Architecture](architecture.png)', file=readme)
     print('### Model summary', file=readme)
-    model.summary(print_fn=lambda x: readme.write(x + '\n'))
+    model.summary(print_fn=lambda x: readme.write(formatSummaryLine(x)))
     print('### Results', file=readme)
     print('![Loss plot](loss.png)', file=readme)
 
@@ -76,28 +89,19 @@ if __name__ == '__main__':
 
     model = Sequential()
     # input: 64x64 images with 1 channel -> (64, 64) tensors.
-    # this applies 32 convolution filters of size 3x3 each.
     model.add(Conv2D(32, (3, 3), activation='relu',
                      input_shape=x_train.shape[1:]))
-    # model.add(Conv2D(32, (3, 3), activation='relu'))
+    model.add(Conv2D(32, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    # model.add(Dropout(0.25))
+    model.add(Dropout(0.25))
 
     model.add(Conv2D(64, (3, 3), activation='relu'))
-    # model.add(Conv2D(64, (3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-    # model.add(Dropout(0.25))
-
-    # model.add(Conv2D(32, (3, 3), activation='relu'))
     model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.25))
 
-    model.add(Conv2D(128, (3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-
     model.add(Flatten())
-    # model.add(Dense(256, activation='relu'))
+    model.add(Dense(256, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Dense(111, activation='softmax'))
 

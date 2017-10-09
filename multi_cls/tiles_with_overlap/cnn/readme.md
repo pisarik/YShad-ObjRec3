@@ -8,25 +8,23 @@
 ### Architecture
 ![Architecture](architecture.png)
 ### Model summary
-
-Layer (type)                | Output Shape          |    Param #   
-----------------------------|-----------------------|-------------
-conv2d_1 (Conv2D)           | (None, 62, 62, 32)    |    320       
-max_pooling2d_1 (MaxPooling2| (None, 31, 31, 32)    |    0         
-conv2d_2 (Conv2D)           | (None, 29, 29, 64)    |    18496     
-max_pooling2d_2 (MaxPooling2| (None, 14, 14, 64)    |    0         
-conv2d_3 (Conv2D)           | (None, 12, 12, 64)    |    36928     
-max_pooling2d_3 (MaxPooling2| (None, 6, 6, 64)      |    0         
-dropout_1 (Dropout)         | (None, 6, 6, 64)      |    0         
-conv2d_4 (Conv2D)           | (None, 4, 4, 128)     |    73856     
-max_pooling2d_4 (MaxPooling2| (None, 2, 2, 128)     |    0         
-flatten_1 (Flatten)         | (None, 512)           |    0         
-dropout_2 (Dropout)         | (None, 512)           |    0         
-dense_1 (Dense)             | (None, 111)           |    56943     
-
-Total params: 186,543  
-Trainable params: 186,543  
+Layer (type)                | Output Shape           |   Param #   
+----------------------------|------------------------|-------------
+conv2d_1 (Conv2D)           | (None, 62, 62, 32)     |   320       
+conv2d_2 (Conv2D)           | (None, 60, 60, 32)     |   9248      
+max_pooling2d_1 (MaxPooling2| (None, 30, 30, 32)     |   0         
+dropout_1 (Dropout)         | (None, 30, 30, 32)     |   0         
+conv2d_3 (Conv2D)           | (None, 28, 28, 64)     |   18496     
+conv2d_4 (Conv2D)           | (None, 26, 26, 64)     |   36928     
+max_pooling2d_2 (MaxPooling2| (None, 13, 13, 64)     |   0         
+dropout_2 (Dropout)         | (None, 13, 13, 64)     |   0         
+flatten_1 (Flatten)         | (None, 10816)          |   0         
+dense_1 (Dense)             | (None, 256)            |   2769152   
+dropout_3 (Dropout)         | (None, 256)            |   0         
+dense_2 (Dense)             | (None, 111)            |   28527     
+----------------------------|------------------------|-------------
+Total params: 2,862,671  
+Trainable params: 2,862,671  
 Non-trainable params: 0  
-
 ### Results
 ![Loss plot](loss.png)
